@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime
+from ckeditor.fields import RichTextField
+from multiselectfield import MultiSelectField
 
 # Create your models here.
 class Team(models.Model):
@@ -36,26 +38,26 @@ class Car(models.Model):
         year_choice.append((r,r))
 
     car_title = models.CharField(max_length=255)
-    state = models.CharField(choices=state_choice, max_length=255)
+    state = MultiSelectField(choices=state_choice, max_length=100)
     city = models.CharField(max_length=255)
     color = models.CharField(max_length=255)
     model = models.CharField(max_length=255)
     year = models.IntegerField(('year'), choices=year_choice)
     condition = models.CharField(max_length=255)
     price = models.IntegerField()
-    description = models.TextField()
+    description = RichTextField()
     car_photo = models.ImageField(upload_to='photo/%Y/%m/%d/')
     car_photo_1 = models.ImageField(upload_to='photo/%Y/%m/%d/', blank=True)
     car_photo_2 = models.ImageField(upload_to='photo/%Y/%m/%d/', blank=True)
     car_photo_3 = models.ImageField(upload_to='photo/%Y/%m/%d/', blank=True)
     car_photo_4 = models.ImageField(upload_to='photo/%Y/%m/%d/', blank=True)
-    features = models.CharField(choices=features_choice, max_length=255)
+    features = MultiSelectField(choices=features_choice, max_length=100)
     body_style = models.CharField(max_length=255)
     engine = models.CharField(max_length=255)
     transmission = models.CharField(max_length=255)
     interior = models.CharField(max_length=255)
     miles = models.IntegerField()
-    doors = models.IntegerField(choices=doors_choice)
+    doors = MultiSelectField(choices=doors_choice, max_length=100)
     passengers = models.IntegerField()
     vin_no = models.CharField(max_length=255)
     milage = models.IntegerField()

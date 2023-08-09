@@ -1,0 +1,81 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+      
+    <div class="col-lg-4 col-md-6">
+        <div class="car-box">
+          <div class="car-thumbnail">
+            <a href="car-details.html" class="car-img">
+              <div class="tag">For Sale</div>
+              <img class="d-block w-100" src="{% static 'img/car/car-1.jpg' %}" alt="car" />
+              <div class="facilities-list clearfix">
+                <ul>
+                  <li>
+                    <span><i class="flaticon-way"></i></span>4,000 km
+                  </li>
+                  <li>
+                    <span><i class="flaticon-calendar-1"></i></span>2020
+                  </li>
+                  <li>
+                    <span><i class="flaticon-manual-transmission"></i></span>Manual
+                  </li>
+                </ul>
+              </div>
+            </a>
+            <div class="carbox-overlap-wrapper">
+              <div class="overlap-box">
+                <div class="overlap-btns-area">
+                  <div class="car-magnify-gallery">
+                    <a href="{% static 'img/car/car-1.jpg' %}" class="overlap-btn">
+                      <i class="fa fa-expand"></i>
+                      <img class="hidden" src="{% static 'img/car/car-1.jpg' %}" />
+                    </a>
+                    <a href="img/car/car-2.jpg" class="hidden">
+                      <img class="hidden" src="img/car/car-2.jpg" />
+                    </a>
+                    <a href="img/car/car-3.jpg" class="hidden">
+                      <img class="hidden" src="img/car/car-3.jpg" />
+                    </a>
+                    <a href="img/car/car-4.jpg" class="hidden">
+                      <img class="hidden" src="img/car/car-4.jpg" />
+                    </a>
+                    <a href="img/car/car-5.jpg" class="hidden">
+                      <img class="hidden" src="img/car/car-5.jpg" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="detail">
+            <h1 class="title">
+              <a href="car-details.html">Lamborghini Huracán</a>
+            </h1>
+            <div class="location">
+              <a href="car-details.html">
+                <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
+              </a>
+            </div>
+          </div>
+          <div class="footer clearfix">
+            <div class="pull-left ratings days">
+              <p class="cartype">Sedan</p>
+            </div>
+            <div class="pull-right">
+              <p class="price">$850.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
