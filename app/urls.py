@@ -1,8 +1,10 @@
 from django.urls import path
-from . import views
-from django.conf.urls.static import static
-from django.conf import settings
+from app import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('services/', views.services, name="services"),
+    path('about/', views.about, name="about"),
+    path('contact/', views.contact, name="contact"),
+    path('cars/', views.cars, name="cars"),
+]
