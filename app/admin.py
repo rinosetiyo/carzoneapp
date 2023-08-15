@@ -17,8 +17,8 @@ class CarAdmin(admin.ModelAdmin):
         return format_html("<img src='{}' width='40' />".format(object.car_photo.url))
     photo.short_description = 'Car'
 
-    list_display = ('id','photo','car_title','condition','price','milage','fuel_type','created_at','is_featured')
-    search_fields = ('car_title','model')
+    list_display = ('id','photo','title','condition','price','milage','fuel_type','created_at','is_featured')
+    search_fields = ('title','model')
     list_editable = ('is_featured',)
     list_filter = ('condition','price','milage')
 

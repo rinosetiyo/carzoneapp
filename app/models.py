@@ -37,7 +37,7 @@ class Car(models.Model):
     for r in range(2000, (datetime.now().year + 1)):
         year_choice.append((r,r))
 
-    car_title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     state = MultiSelectField(choices=state_choice, max_length=100)
     city = models.CharField(max_length=255)
     color = models.CharField(max_length=255)
@@ -56,10 +56,8 @@ class Car(models.Model):
     engine = models.CharField(max_length=255)
     transmission = models.CharField(max_length=255)
     interior = models.CharField(max_length=255)
-    miles = models.IntegerField()
     doors = MultiSelectField(choices=doors_choice, max_length=100)
     passengers = models.IntegerField()
-    vin_no = models.CharField(max_length=255)
     milage = models.IntegerField()
     fuel_type = models.CharField(max_length=255)
     no_of_owner = models.CharField(max_length=255)
@@ -67,4 +65,4 @@ class Car(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.car_title
+        return self.title
