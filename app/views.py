@@ -35,6 +35,13 @@ def cars(request):
     }
     return render(request, 'pages/cars.html', context)
 
+def car_detail(request, slug):
+    car = Car.objects.get(slug=slug)
+    context = {
+        'car':car,
+    }
+    return render(request, 'pages/car_detail.html', context)
+
 def search(request):
     cars = Car.objects.order_by('-created_at')
 

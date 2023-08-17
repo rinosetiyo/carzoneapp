@@ -2,6 +2,8 @@ from django.db import models
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from multiselectfield import MultiSelectField
+from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 # Create your models here.
 class Team(models.Model):
@@ -38,6 +40,7 @@ class Car(models.Model):
         year_choice.append((r,r))
 
     title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, null=True)
     state = MultiSelectField(choices=state_choice, max_length=100)
     city = models.CharField(max_length=255)
     color = models.CharField(max_length=255)
@@ -64,5 +67,24 @@ class Car(models.Model):
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title)
+        return super(Car, self).save(*args, **kwargs)
+    
     def __str__(self):
         return self.title
+    
+class Contact(models.Model):
+    email = models.EmailField(max_length=200)
+    customer_need = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    state = models.CharField(max_length=200)
+    phone = models.CharField(max_length=200)
+    message = models.TextField(blank=True)
+    car_title = models.ForeignKey(Car, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
