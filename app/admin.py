@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Team, Car
+from app.models import Team, Car, Contact
 from django.utils.html import format_html
 
 # Register your models here.
@@ -24,3 +24,4 @@ class CarAdmin(admin.ModelAdmin):
 
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Car, CarAdmin)
+admin.site.register(Contact)

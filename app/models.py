@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 from multiselectfield import MultiSelectField
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from datetime import datetime
 
 # Create your models here.
 class Team(models.Model):
@@ -76,15 +77,18 @@ class Car(models.Model):
         return self.title
     
 class Contact(models.Model):
-    email = models.EmailField(max_length=200)
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100, null=True)
+    car_id = models.IntegerField(null=True)
     customer_need = models.CharField(max_length=200)
+    car_title = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
     state = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
     phone = models.CharField(max_length=200)
     message = models.TextField(blank=True)
-    car_title = models.ForeignKey(Car, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    create_at = models.DateTimeField(auto_now_add=True)
+    user_id = models.IntegerField(blank=True, null=True)
+    create_at = models.DateTimeField(blank=True, default=datetime.now)
 
     def __str__(self):
         return self.email
