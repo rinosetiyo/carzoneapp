@@ -226,10 +226,10 @@
             </div>
             <div class="detail">
               <h1 class="title">
-                <a href="{% url 'car_detail' featured.slug %}">{{ featured.title }}</a>
+                <a href="{% url 'car_detail' featured.id %}">{{ featured.title }}</a>
               </h1>
               <div class="location">
-                <a href="{% url 'car_detail' featured.slug %}">
+                <a href="{% url 'car_detail' featured.id %}">
                   <i class="flaticon-pin"></i>{{ featured.state }} | {{ featured.city }}
                 </a>
               </div>
@@ -315,10 +315,10 @@
           </div>
           <div class="detail">
             <h1 class="title">
-              <a href="{% url 'car_detail' car.slug %}">{{ car.title }}</a>
+              <a href="{% url 'car_detail' car.id %}">{{ car.title }}</a>
             </h1>
             <div class="location">
-              <a href="{% url 'car_detail' car.slug %}">
+              <a href="{% url 'car_detail' car.id %}">
                 <i class="flaticon-pin"></i>{{ car.state }} | {{ car.city }}
               </a>
             </div>

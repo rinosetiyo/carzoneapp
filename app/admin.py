@@ -22,6 +22,10 @@ class CarAdmin(admin.ModelAdmin):
     list_editable = ('is_featured',)
     list_filter = ('condition','price','milage')
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('id','car_title','customer_need','city','state','email','phone')
+    search_fields = ('car_title',)
+
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Car, CarAdmin)
-admin.site.register(Contact)
+admin.site.register(Contact, ContactAdmin)

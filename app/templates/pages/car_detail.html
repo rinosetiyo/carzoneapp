@@ -25,6 +25,7 @@
                 <div class="car-details-section">
                     <!-- Heading start -->
                     <div class="heading-car clearfix">
+                        {% include 'include/messages.html' %}
                         <div class="pull-left">
                             <h3>{{ car.title }}</h3>
                             <h6>
@@ -178,13 +179,14 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                            <form action="" method="post">
+                            <form action="{% url 'inquiry' %}" method="post">
                                 {% csrf_token %}
                                 <div class="form-group">
                                   <label for="name" class="col-form-label">Hello, My Name is</label>
                                   <div class="row">
                                     {% if user.is_authenticated %}
                                     <div class="col">
+                                        <input type="hidden" name="user_id" value="{{ user.id }}">
                                         <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ user.first_name }}" required>
                                       </div>
                                       <div class="col">
@@ -192,6 +194,7 @@
                                       </div>
                                     {% else %}
                                     <div class="col">
+                                        <input type="hidden" name="user_id" value="{{ user.id }}">
                                       <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
                                     </div>
                                     <div class="col">
@@ -210,6 +213,7 @@
                                     </div>
                                 
                                 <div class="form-group">
+                                    <input type="hidden" name="car_id" value="{{ car.id }}">
                                   <input type="text" name="car_title" class="form-control" value="{{ car.title }}" readonly>
                                 </div>
                                
@@ -227,6 +231,16 @@
 
                                 <div class="form-group">
                                   <div class="row">
+                                    {% if user.is_authenticated %}
+                                    <div class="col">
+                                        <label for="name" class="col-form-label">You can reach me by email at</label>
+                                      <input type="email" name="email" class="form-control" placeholder="Email Address" value="{{ user.email }}" required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="phone" class="col-form-label">or by phone at</label>
+                                      <input type="text" name="phone" placeholder="Phone Number (optional)" class="form-control">
+                                    </div>
+                                    {% else %}
                                     <div class="col">
                                         <label for="name" class="col-form-label">You can reach me by email at</label>
                                       <input type="email" name="email" class="form-control" placeholder="Email Address" required>
@@ -235,6 +249,7 @@
                                         <label for="phone" class="col-form-label">or by phone at</label>
                                       <input type="text" name="phone" placeholder="Phone Number (optional)" class="form-control">
                                     </div>
+                                    {% endif %}
                                   </div>
                                 </div>
 

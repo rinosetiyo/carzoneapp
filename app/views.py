@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from app.models import Team, Car
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -41,8 +41,8 @@ def cars(request):
     }
     return render(request, 'pages/cars.html', context)
 
-def car_detail(request, slug):
-    car = Car.objects.get(slug=slug)
+def car_detail(request, id):
+    car = get_object_or_404(Car, pk=id)
     context = {
         'car':car,
     }
@@ -78,15 +78,16 @@ def contact(request):
         email_subject = "You have a new message from carzone website regarding" + subject
         message_body = 'Name: '+ name + 'Email: '+ email + 'Phone: ' + phone + 'Message: ' + message
 
-        admin_info = User.objects.get(is_superuser=True)
-        admin_email = admin_info.email
-        send_mail(
-            email_subject,
-            message_body,
-            'developer.rino@gmail.com',
-            [admin_email],
-            fail_silently=False,
-        )
+        # admin_info = User.objects.get(is_superuser=True)
+        # admin_email = admin_info.email
+        # send_mail(
+        #     email_subject,
+        #     message_body,
+        #     admin_email,
+        #     ['developer.rino@gmail.com'],
+        #     fail_silently=False,
+        # )
+
         messages.success(request, 'Thank you for contacting us. We will get back to you shortly')
         return redirect('contact')
     
@@ -115,14 +116,16 @@ def inquiry(request):
         
         contact = Contact(car_id=car_id, car_title=car_title, user_id=user_id, first_name=first_name, last_name=last_name, customer_need=customer_need, city=city, state=state, email=email, phone=phone, message=message)
 
-        admin_info = User.objects.get(is_superuser=True)
-        admin_email = admin_info.email
-        send_mail(
-            'New car inquiry',
-            'You have a new inquiry for the car' + car_title + '. Please login to your admin panel for more info.',
-            [admin_email],
-            fail_silently=False,
-        )
+        # admin_info = User.objects.get(is_superuser=True)
+        # admin_email = admin_info.email
+        # send_mail(
+        #     'New car inquiry',
+        #     'You have a new inquiry for the car' + car_title + '. Please login to your admin panel for more info.',
+        #     admin_email,
+        #     ['developer.rino@gmail.com'],
+        #     fail_silently=False,
+        # )
+
         contact.save()
         messages.success(request, 'Your request has been submitted, we will get back to you shortly.')
         return redirect('/cars/' + car_id)
