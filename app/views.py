@@ -11,12 +11,18 @@ def index(request):
     features = Car.objects.order_by('-created_at').filter(is_featured=True)
     latest_cars = Car.objects.order_by('-created_at')
     teams = Team.objects.all()
+    
+    # values list is for make list on dropdown without call object on template
     model_search = Car.objects.values_list('model', flat=True).distinct()
+    location_search = Car.objects.values_list('city', flat=True).distinct()
+    year_search = Car.objects.values_list('year', flat=True).distinct()
     context = {
         'teams':teams,
         'features':features,
         'cars':latest_cars,
         'model_search':model_search,
+        'location_search':location_search,
+        'year_search':year_search,
     }
     return render(request, 'pages/index.html', context)
 
@@ -31,13 +37,18 @@ def services(request):
     return render(request, 'pages/services.html')
 
 def cars(request):
-    cars = Car.objects.all().order_by('-created_at')
-    paginator = Paginator(cars, 1)
+    cars = Car.objects.order_by('-created_at')
+    paginator = Paginator(cars, 6)
     page = request.GET.get('page')
     paged_cars = paginator.get_page(page)
+    location_search = Car.objects.values_list('city', flat=True).distinct()
+    year_search = Car.objects.values_list('year', flat=True).distinct()
+
     context = {
         # 'cars':cars,
         'cars': paged_cars,
+        'location_search':location_search,
+        'year_search':year_search,
     }
     return render(request, 'pages/cars.html', context)
 
@@ -50,7 +61,7 @@ def car_detail(request, id):
 
 def search(request):
     cars = Car.objects.order_by('-created_at')
-
+    
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
@@ -61,6 +72,16 @@ def search(request):
         keyword = request.GET['model']
         if keyword:
             cars = Car.objects.filter(model__iexact=keyword)
+
+    if 'city' in request.GET:
+        keyword = request.GET['city']
+        if keyword:
+            cars = Car.objects.filter(city__iexact=keyword)
+
+    if 'year' in request.GET:
+        keyword = request.GET['year']
+        if keyword:
+            cars = Car.objects.filter(year__iexact=keyword)
 
     context = {
         'cars':cars,
