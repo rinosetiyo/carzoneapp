@@ -155,7 +155,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'developer.rino@gmail.com'
-EMAIL_HOST_PASSWORD = 'r1i2n3o4'
+EMAIL_HOST_PASSWORD = 'test'
 EMAIL_USE_TLS = True
 
 # Default primary key field type
